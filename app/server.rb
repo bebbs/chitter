@@ -14,6 +14,7 @@ class Chitter < Sinatra::Base
   DataMapper.finalize
 
   use Rack::Flash
+  use Rack::MethodOverride
 
   enable :sessions
   set :session_secret, 'super secret'
@@ -56,6 +57,11 @@ class Chitter < Sinatra::Base
       flash[:errors] = ["The email or password is incorrect"]
       erb "/sessions/new"
     end
+  end
+
+  delete '/sessions' do
+    session[:user_id] = nil
+    flash[:notice] = 'Goodbye'
   end
 
   def current_user
