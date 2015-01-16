@@ -13,6 +13,8 @@ class Chitter < Sinatra::Base
 
   DataMapper.finalize
 
+  use Rack::Flash
+
   enable :sessions
   set :session_secret, 'super secret'
 
@@ -21,17 +23,23 @@ class Chitter < Sinatra::Base
   end
 
   get '/users/new' do
+    @user = User.new
     erb :"users/new"
   end
 
   post '/users' do
-    @user = User.create(email: params[:email],
+    @user = User.new(email: params[:email],
                         username: params[:username],
                         display_name: params[:display_name],
                         password: params[:password],
                         password_confirmation: params[:password_confirmation])
-    session[:user_id] = @user.id
-    redirect '/'
+    if @user.save
+      session[:user_id] = @user.id
+      redirect '/'
+    else
+      flash[:notice] = "Sorry, your passwords don't match"
+      erb :"/users/new"
+    end
   end
 
   def current_user
