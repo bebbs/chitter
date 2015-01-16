@@ -3,15 +3,15 @@ require 'data_mapper'
 require 'bcrypt'
 require 'rack-flash'
 require_relative '../lib/user.rb'
+require_relative '../lib/peep.rb'
 
 class Chitter < Sinatra::Base
 
   env = ENV['RACK_ENV'] || 'development'
 
   DataMapper.setup(:default, "postgres://localhost/chitter_#{env}")
-  DataMapper.auto_upgrade!
-
   DataMapper.finalize
+  DataMapper.auto_upgrade!
 
   use Rack::Flash
   use Rack::MethodOverride
@@ -55,7 +55,7 @@ class Chitter < Sinatra::Base
       redirect '/'
     else
       flash[:errors] = ["The email or password is incorrect"]
-      erb "/sessions/new"
+      erb :"/sessions/new"
     end
   end
 
