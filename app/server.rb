@@ -21,6 +21,7 @@ class Chitter < Sinatra::Base
 
   get '/' do
     erb :index
+    @peeps = Peep.all
   end
 
   get '/users/new' do
