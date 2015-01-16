@@ -39,6 +39,13 @@ feature "Logging in" do
     expect(page).to have_content('Welcome, Josh')
   end
 
+  scenario "With incorrect credentials" do
+    visit '/'
+    expect(page).not_to have_content("Welcome, Josh")
+    sign_in('josh@test.com', 'wrong')
+    expect(page).not_to have_content("Welcome, Josh")
+  end
+
 end
 
 def sign_up(email='josh@test.com', 
