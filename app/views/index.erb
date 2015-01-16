@@ -1,0 +1,7 @@
+<% if current_user %>
+  <form action="/peep" method="post">
+    <label>Post a peep: <input type="text" name="peep">
+    </label>
+    <input type="submit" value="Post">
+  </form>
+<% end %>

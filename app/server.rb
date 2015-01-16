@@ -30,10 +30,10 @@ class Chitter < Sinatra::Base
 
   post '/users' do
     @user = User.new(email: params[:email],
-                        username: params[:username],
-                        display_name: params[:display_name],
-                        password: params[:password],
-                        password_confirmation: params[:password_confirmation])
+                     username: params[:username],
+                     display_name: params[:display_name],
+                     password: params[:password],
+                     password_confirmation: params[:password_confirmation])
     if @user.save
       session[:user_id] = @user.id
       redirect '/'
@@ -62,6 +62,15 @@ class Chitter < Sinatra::Base
   delete '/sessions' do
     session[:user_id] = nil
     flash[:notice] = 'Goodbye'
+  end
+
+  post '/peep' do
+    peep = Peep.new(content: params[:peep], user_id: current_user.id)
+    if peep.save
+      redirect '/'
+    else
+      flash[:notice] = 'There was a problem posting your peep - please try again'
+    end
   end
 
   def current_user

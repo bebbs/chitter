@@ -14,4 +14,17 @@ feature 'Posting a peep' do
     expect(user.peeps.length).to eq 0
   end
 
+  scenario 'A user can post a peep' do
+    user = User.first
+    post_peep
+    expect(Peep.first.content).to eq 'Test first peep'
+    expect(Peep.first.user_id).to eq user.id
+  end
+
+end
+
+def post_peep
+  visit '/'
+  fill_in 'peep', with: 'Test first peep'
+  click_button 'Post'
 end
