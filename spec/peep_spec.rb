@@ -1,5 +1,6 @@
 require 'spec_helper'
-require 'helpers/user_management.rb'
+require 'helpers/user_management'
+require 'helpers/peep'
 
 feature 'Posting a peep' do
   
@@ -11,7 +12,7 @@ feature 'Posting a peep' do
 
   scenario 'A user can post a peep' do
     sign_up_and_in
-    post_peep
+    post_peep('Test first peep')
     user = User.first
     expect(Peep.first.content).to eq 'Test first peep'
     expect(Peep.first.user_id).to eq user.id
@@ -21,16 +22,4 @@ feature 'Posting a peep' do
     visit '/'
     expect(page).not_to have_content('Post a peep:')
   end
-end
-
-def post_peep
-  visit '/'
-  fill_in 'peep', with: 'Test first peep'
-  click_button 'Post'
-end
-
-def sign_up_and_in
-  sign_up
-  sign_in('josh@test.com', 'test')
-  expect(page).to have_content('Welcome, Josh')
 end

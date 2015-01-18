@@ -20,3 +20,9 @@ def sign_in(email, password)
   fill_in 'password', with: password
   click_button 'Sign in'
 end
+
+def sign_up_and_in
+  sign_up
+  sign_in('josh@test.com', 'test')
+  expect(page).to have_content('Welcome, Josh')
+end
