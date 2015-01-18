@@ -4,4 +4,15 @@
     </label>
     <input type="submit" value="Post">
   </form>
+<% else %>
+  <h3>Log in to post peeps!</h3>
 <% end %>
+
+<% if has_peeps? %>
+  <ul>
+    <% @peeps.each do |peep| %>
+      <li><%= peep.content %></li>
+    <% end %>
+  </ul>
+<% end %>
+
