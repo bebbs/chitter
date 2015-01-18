@@ -20,7 +20,7 @@ class Chitter < Sinatra::Base
   set :session_secret, 'super secret'
 
   get '/' do
-    has_peeps? ? @peeps = Peep.all.reverse : @peeps = nil
+    has_peeps? ? @peeps = Peep.all.reverse : nil
     erb :index
   end
 
@@ -62,7 +62,7 @@ class Chitter < Sinatra::Base
 
   delete '/sessions' do
     session[:user_id] = nil
-    flash[:notice] = 'Goodbye'
+    redirect '/'
   end
 
   post '/peep' do
@@ -80,6 +80,11 @@ class Chitter < Sinatra::Base
 
   def has_peeps?
     Peep.all.length > 0
+  end
+
+  def self.fetch_user
+    @user = User.find {|user| self.user_id == user.id }
+    return @user.username
   end
 
 end
