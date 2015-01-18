@@ -1,6 +1,10 @@
 require 'spec_helper'
 require 'helpers/user_management'
+<<<<<<< HEAD
 require 'helpers/peep'
+=======
+require 'helpers/peeps'
+>>>>>>> 27327070a94b0f4d31991591ed171f86d4cc0529
 
 feature 'Posting a peep' do
   

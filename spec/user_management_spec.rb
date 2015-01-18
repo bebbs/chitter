@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'helpers/user_management.rb'
+require 'helpers/user_management'
 
 feature 'User signs up' do
   
