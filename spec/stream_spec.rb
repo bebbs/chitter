@@ -18,4 +18,11 @@ feature 'Viewing the stream of peeps' do
     expect(page).to have_content('This is the third test peep')
   end
 
+  scenario 'The peeps should be displayed reverse chronologically' do
+    visit '/'
+    expect(page).to have_selector('ul.peeps li:nth-child(1)', text: 'This is the third test peep')
+    expect(page).to have_selector('ul.peeps li:nth-child(2)', text: 'This is the second test peep')
+    expect(page).to have_selector('ul.peeps li:nth-child(3)', text: 'This is the first test peep')
+  end
+
 end

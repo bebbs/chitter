@@ -24,5 +24,4 @@ end
 def sign_up_and_in
   sign_up
   sign_in('josh@test.com', 'test')
-  expect(page).to have_content('Welcome, Josh')
 end

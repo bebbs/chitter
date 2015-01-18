@@ -20,7 +20,7 @@ class Chitter < Sinatra::Base
   set :session_secret, 'super secret'
 
   get '/' do
-    has_peeps? ? @peeps = Peep.all : @peeps = nil
+    has_peeps? ? @peeps = Peep.all.reverse : @peeps = nil
     erb :index
   end
 
