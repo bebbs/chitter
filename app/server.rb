@@ -66,7 +66,7 @@ class Chitter < Sinatra::Base
   end
 
   post '/peep' do
-    peep = Peep.new(content: params[:peep], user_id: current_user.id)
+    peep = Peep.new(content: params[:peep], user_id: current_user.id, created_at: Time.now)
     if peep.save
       redirect '/'
     else
@@ -75,11 +75,12 @@ class Chitter < Sinatra::Base
   end
 
   get '/profile/:user_name' do
-    if params[:user_name]
+    if find_by_username(params[:user_name])
       @user = find_by_username(params[:user_name])
+      @peeps = @user.peeps if has_peeps?
       erb :profile
     else
-      'This user cannot be found'
+      flash[:notice] = 'This user cannot be found'
     end
   end
 

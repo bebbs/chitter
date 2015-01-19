@@ -1,0 +1,10 @@
+<% if has_peeps? %>
+  <ul class="peeps">
+    <% @peeps.each do |peep| %>
+      <li>
+        <p><%= peep.content %></p>
+        <em>Posted by <strong><%= peep.user.username %></strong> at <%= peep.created_at.strftime("%H:%M") %></em>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

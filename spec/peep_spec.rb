@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'helpers/user_management'
+require 'helpers/peep'
 
 feature 'Posting a peep' do
   
@@ -23,10 +24,4 @@ feature 'Posting a peep' do
     expect(page).not_to have_content('Post a peep:')
     expect(page).to have_content('Log in to post peeps!')
   end
-end
-
-def post_peep(content)
-  visit '/'
-  fill_in 'peep', with: content
-  click_button 'Post'
 end

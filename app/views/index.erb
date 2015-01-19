@@ -8,14 +8,4 @@
   <h3>Log in to post peeps!</h3>
 <% end %>
 
-<% if has_peeps? %>
-  <ul class="peeps">
-    <% @peeps.each do |peep| %>
-      <li>
-        <p><%= peep.content %></p>
-        <em>Posted by <%= peep.user.username %></em>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
+<%= erb :"partials/peep_display" %>
