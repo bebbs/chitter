@@ -1,5 +1,5 @@
 def sign_up(email='josh@test.com', 
-            username='@josh', 
+            username='josh', 
             display_name='Josh', 
             password='test',
             password_confirmation='test')

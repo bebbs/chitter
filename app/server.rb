@@ -31,7 +31,7 @@ class Chitter < Sinatra::Base
 
   post '/users' do
     @user = User.new(email: params[:email],
-                     username: params[:username],
+                     username: '@' + params[:username],
                      display_name: params[:display_name],
                      password: params[:password],
                      password_confirmation: params[:password_confirmation])
@@ -74,6 +74,15 @@ class Chitter < Sinatra::Base
     end
   end
 
+  get '/profile/:user_name' do
+    if params[:user_name]
+      @user = find_by_username(params[:user_name])
+      erb :profile
+    else
+      'This user cannot be found'
+    end
+  end
+
   def current_user
     @current_user ||= User.get(session[:user_id]) if session[:user_id]
   end
@@ -82,9 +91,8 @@ class Chitter < Sinatra::Base
     Peep.all.length > 0
   end
 
-  def self.fetch_user
-    @user = User.find {|user| self.user_id == user.id }
-    return @user.username
+  def find_by_username(username)
+    User.find{|user| user.username == ('@' + username)}
   end
 
 end
