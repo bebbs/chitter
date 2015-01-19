@@ -7,6 +7,8 @@ gem 'dm-postgres-adapter'
 gem 'database_cleaner'
 gem 'bcrypt-ruby'
 gem 'rack-flash3'
+  gem 'timecop'
+
 
 group :test, :development do
   gem 'launchy'
@@ -14,4 +16,5 @@ group :test, :development do
   gem 'cucumber'
   gem 'cucumber-sinatra'
   gem 'rspec'
+  gem 'timecop'
 end

@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/custom.css">
+  </head>
+  <body>
+    <header>
+      <nav id="main-nav">
+  <ul>
+    <li><a href="/">CHITTER</a></li>
+    
+      <li>
+        <form method="post" action="/sessions">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit">Sign out</button>
+        </form>
+      </li>
+    
+
+  </ul>
+</nav>
+    </header>
+    
+      Welcome, Josh
+    
+
+    
+    <section class="container">
+        <form action="/peep" method="post">
+    <label>Post a peep: <input type="text" name="peep">
+    </label>
+    <input type="submit" value="Post">
+  </form>
+
+  <ul class="peeps">
+    
+      <li>
+        <p>This is the second test peep</p>
+        <em>Posted by <strong>@josh</strong> at 23:03</em>
+      </li>
+    
+      <li>
+        <p>This is the third test peep</p>
+        <em>Posted by <strong>@josh</strong> at 21:03</em>
+      </li>
+    
+      <li>
+        <p>This is the first test peep</p>
+        <em>Posted by <strong>@josh</strong> at 15:30</em>
+      </li>
+    
+  </ul>
+
+    </section>
+
+  </body>
+</html>

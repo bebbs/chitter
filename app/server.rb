@@ -19,8 +19,11 @@ class Chitter < Sinatra::Base
   enable :sessions
   set :session_secret, 'super secret'
 
+  set :public_dir, Proc.new {File.join(root, 'public')}
+  set :public_folder, 'public'
+
   get '/' do
-    has_peeps? ? @peeps = Peep.all.reverse : nil
+    @peeps = Peep.get_all_in_order_of_creation if has_peeps? 
     erb :index
   end
 

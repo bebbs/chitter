@@ -1,13 +1,17 @@
 require 'spec_helper'
 require 'helpers/user_management'
 require 'helpers/peep'
+require 'timecop'
 
 feature 'Viewing the stream of peeps' do
 
   before(:each) do
     sign_up
-    post_peep('This is the first test peep')
+    Timecop.freeze(Time.now + 7200)
     post_peep('This is the second test peep')
+    Timecop.return
+    post_peep('This is the first test peep')
+    Timecop.freeze(Time.now + 20000)
     post_peep('This is the third test peep')
   end
 
@@ -25,8 +29,9 @@ feature 'Viewing the stream of peeps' do
 
   scenario 'The peeps should be displayed reverse chronologically' do
     visit '/'
-    expect(page).to have_selector('ul.peeps li:nth-child(1)', text: 'This is the third test peep')
-    expect(page).to have_selector('ul.peeps li:nth-child(2)', text: 'This is the second test peep')
+    
+    expect(page).to have_selector('ul.peeps li:nth-child(1)', text: 'This is the second test peep')
+    expect(page).to have_selector('ul.peeps li:nth-child(2)', text: 'This is the third test peep')
     expect(page).to have_selector('ul.peeps li:nth-child(3)', text: 'This is the first test peep')
   end
 

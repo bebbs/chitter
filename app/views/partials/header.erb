@@ -1,0 +1,17 @@
+<nav id="main-nav">
+  <ul>
+    <li><a href="/">CHITTER</a></li>
+    <% if current_user %>
+      <li>
+        <form method="post" action="/sessions">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit">Sign out</button>
+        </form>
+      </li>
+    <% else %>
+      <li><a href="/users/new">Sign up</a></li>
+      <li><a href="/sessions/new">Sign in</a></li>
+    <% end %>
+
+  </ul>
+</nav>
